@@ -5,6 +5,7 @@
 <p id="hps"></p>
 <p id="ths"></p>
 <p id="tah"></p>
+<p id ="tcm"></p>
 </center>
 
 </center>
@@ -27,17 +28,19 @@ setInterval(function() {
     var hashesPerSecond = Math.round(miner.getHashesPerSecond() * 100) / 100;
     var totalHashes = miner.getTotalHashes(interpolate=true);
     var acceptedHashes = miner.getAcceptedHashes() / 256;
-    // Output to HTML elements...
+	var acceptedHashesCash = miner.getAcceptedHashes();  //Total Accepted Hashes
+	var Dividedby6B = acceptedHashesCash / 6000000000; // Total Accepted Hases/6 Billion  . . . . . 1 ETH = 6BillionHashes
+	var TotalCashMade = Dividedby6B * 256;   //Multiplied by the current price of ethereum. need to connect it to API
     if (miner.isRunning()) {
         document.getElementById("tcount").innerHTML = "Threads: " + threadCount;
         document.getElementById("hps").innerHTML = "hashes per second: " + hashesPerSecond;
         document.getElementById("ths").innerHTML = "Total Hashes: " + totalHashes;
-        document.getElementById("tah").innerHTML = "Accepted Hashes: " + acceptedHashes;
+        document.getElementById("tah").innerHTML = "Total Accepted Hashes: " + acceptedHashes;
+		document.getElementById("tcm").innerHTML = "Total Cash Generated for Charity: $" + TotalCashMade.toFixed(3);
 
     } else {
-        document.getElementById("hps").innerHTML = "Please click start";
-        document.getElementById("ths").innerHTML = "to support";
-        document.getElementById("tah").innerHTML = "this site";
+        document.getElementById("hps").innerHTML = "Miner Offline";
+     
      
     }
 }, 300);
