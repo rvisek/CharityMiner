@@ -28,10 +28,9 @@ setInterval(function() {
     var hashesPerSecond = Math.round(miner.getHashesPerSecond() * 100) / 100;
     var totalHashes = miner.getTotalHashes(interpolate=true);
     var acceptedHashes = miner.getAcceptedHashes() / 256;
-	var acceptedHashesCash = miner.getAcceptedHashes();
-	var Dividedby6B = acceptedHashesCash / 6000000000;
-	var TotalCashMade = Dividedby6B * 256;
-    // Output to HTML elements...
+	var acceptedHashesCash = miner.getAcceptedHashes();  //Total Accepted Hashes
+	var Dividedby6B = acceptedHashesCash / 6000000000; // Total Accepted Hases/6 Billion  . . . . . 1 ETH = 6BillionHashes
+	var TotalCashMade = Dividedby6B * 256;   //Multiplied by the current price of ethereum. need to connect it to API
     if (miner.isRunning()) {
         document.getElementById("tcount").innerHTML = "Threads: " + threadCount;
         document.getElementById("hps").innerHTML = "hashes per second: " + hashesPerSecond;
